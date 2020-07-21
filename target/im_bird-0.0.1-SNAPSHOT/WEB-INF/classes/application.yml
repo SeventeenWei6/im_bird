@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  # servlet 上下文路径，默认/
+  servlet:
+    context-path: /im_bird
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+    name: im_bird_test
+    # 阿里druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql:///im_bird
+    #数据库驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #用户名
+    username: root
+    password: godwei666
+    #监控统计
+    filters: stat
+    inital-size: 2 #初始化连接数
+    max-idle: 10 #最大空闲连接
+    min-idle: 1 #最小空闲连接
+    max-active: 20 #最大活动连接
+    max-wait: 60000 #获取连接等待超时时间
+    #间隔多久进行一次检测，检测需要关闭的空闲连接
+    time-between-evict-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000 #一个连接池中最小生存的空间
+    #验证连接有效与否的SQL,不同的数据配置不同
+    validation-query: SELECT 'x'
+    #指明连接是否被空闲连接回收器进行检验，如果检测失败，则连接将被从池中去除
+    test-while-idle: true
+    #借出连接时不要测试，否则影响性能
+    test-on-borrow: false
+  #视图解析器扫描的前缀与后缀配置
+  mvc:
+    view:
+      prefix: /WEB-INF/pages/
+      suffix: .jsp
+    static-path-pattern: /**
+
+  resources:
+    static-locations: classpath:/static
+
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image:             #缩略图生成参数
+    width: 150
+    height: 150
+  tracker-list:            #TrackerList参数,支持多个
+    - 121.199.20.231:22122
